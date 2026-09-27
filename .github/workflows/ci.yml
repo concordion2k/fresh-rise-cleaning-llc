@@ -1,0 +1,15 @@
+name: CI
+
+# Pull-request gate. Runs the shared checks workflow. On pushes to main the same checks run as the
+# `verify` job in deploy.yml (which blocks the deploy), so they aren't duplicated here.
+on:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    uses: ./.github/workflows/checks.yml

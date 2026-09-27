@@ -1,0 +1,11 @@
+# Copy to terraform.tfvars for local overrides. (terraform.tfvars is git-ignored; production values
+# live in prod.auto.tfvars.)
+
+aws_region  = "us-east-1"
+environment = "prod"
+
+# domain_name = "freshrisecleaning.com"
+
+tags = {
+  Owner = "grasi"
+}
