@@ -44,7 +44,7 @@ h1 {
   text-wrap: pretty;
 }
 .lede :deep(strong) {
-  color: var(--c-green);
+  color: var(--c-green-text);
 }
 
 @media (max-width: 760px) {

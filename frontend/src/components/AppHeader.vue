@@ -2,7 +2,11 @@
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { business, phoneHref } from '@/content/business';
+import { useTheme } from '@/composables/useTheme';
 import logo from '@/assets/logo-tagline.png';
+import logoDark from '@/assets/logo-tagline-dark.png';
+
+const { current: theme } = useTheme();
 
 const menuOpen = ref(false);
 
@@ -18,7 +22,12 @@ const links = [
   <header class="site-header">
     <div class="container bar">
       <RouterLink to="/" class="brand" @click="menuOpen = false">
-        <img :src="logo" :alt="business.name" width="158" height="56" />
+        <img
+          :src="theme === 'dark' ? logoDark : logo"
+          :alt="business.name"
+          width="158"
+          height="56"
+        />
       </RouterLink>
 
       <button
@@ -78,11 +87,11 @@ const links = [
   color: var(--c-ink-soft);
 }
 .nav-link:hover {
-  color: var(--c-green);
+  color: var(--c-green-text);
 }
 /* Exact-active so "Home" isn't highlighted on every page. */
 .nav-link.router-link-exact-active {
-  color: var(--c-green);
+  color: var(--c-green-text);
   border-bottom-color: var(--c-orange);
 }
 .phone {
@@ -110,7 +119,7 @@ const links = [
   width: 26px;
   height: 3px;
   border-radius: 3px;
-  background: var(--c-green);
+  background: var(--c-green-text);
 }
 
 @media (max-width: 820px) {

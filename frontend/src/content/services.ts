@@ -5,7 +5,7 @@ import upholsteryIcon from '@/assets/icon-upholstery.png';
 import rugIcon from '@/assets/icon-rug.png';
 import mattressIcon from '@/assets/icon-mattress.png';
 import petIcon from '@/assets/icon-pet.png';
-import peopleIcon from '@/assets/icon-people.png';
+import residentialIcon from '@/assets/icon-residential.png';
 
 export interface ServiceSummary {
   title: string;
@@ -61,7 +61,7 @@ export const services: ServiceSummary[] = [
   {
     title: 'Residential & commercial',
     body: 'Homes, rentals, offices and small commercial spaces.',
-    icon: peopleIcon,
+    icon: residentialIcon,
   },
 ];
 

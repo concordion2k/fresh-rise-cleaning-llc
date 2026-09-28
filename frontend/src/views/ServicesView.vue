@@ -29,11 +29,15 @@ import { packages, priceGroups } from '@/content/services';
       </div>
     </section>
 
-    <section class="container price-groups grid-auto" style="--min: 320px">
+    <section class="container price-groups grid-auto" style="--min: 400px">
       <div v-for="g in priceGroups" :key="g.title" class="card price-group">
-        <img :src="g.icon" alt="" class="group-icon" />
-        <h2>{{ g.title }}</h2>
-        <p class="group-note">{{ g.note }}</p>
+        <div class="group-head">
+          <img :src="g.icon" alt="" class="group-icon" />
+          <div>
+            <h2>{{ g.title }}</h2>
+            <p class="group-note">{{ g.note }}</p>
+          </div>
+        </div>
         <dl>
           <div v-for="r in g.rows" :key="r.label" class="price-row">
             <dt>{{ r.label }}</dt>
@@ -110,28 +114,41 @@ import { packages, priceGroups } from '@/content/services';
   padding-block: 36px 64px;
 }
 .price-group {
-  padding: 30px 30px 14px;
+  overflow: hidden;
+  padding: 0;
+}
+/* Brand-green header (same as the home page's "What we clean" cards) so the icons stand out. */
+.group-head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 26px;
+  background: var(--c-green);
 }
 .group-icon {
   display: block;
-  width: 64px;
-  height: 64px;
-  margin-bottom: 12px;
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
   object-fit: contain;
 }
-.price-group h2 {
+.group-head h2 {
   margin-bottom: 4px;
   font-size: 21px;
   font-weight: 800;
+  color: #fff;
 }
 .group-note {
-  margin-bottom: 18px;
   font-size: 14px;
-  line-height: 1.55;
-  color: var(--c-muted);
+  line-height: 1.5;
+  color: var(--c-on-green);
 }
 dl {
   margin: 0;
+  padding: 6px 30px 14px;
+}
+.price-row:first-child {
+  border-top: 0;
 }
 .price-row {
   display: flex;
@@ -150,7 +167,7 @@ dd {
   margin: 0;
   font-size: 16px;
   font-weight: 700;
-  color: var(--c-green);
+  color: var(--c-green-text);
   white-space: nowrap;
 }
 

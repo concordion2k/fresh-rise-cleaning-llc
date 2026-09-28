@@ -11,6 +11,10 @@
   --c-leaf: #4caf50;
   --c-orange: #f7931e;
   --c-orange-dark: #e07f0c;
+  /* Green for text, links and outlines (lightens in dark mode; --c-green stays for fills). */
+  --c-green-text: #0f6b3a;
+  /* Cream behind the brand icons — constant in both themes so the icon art always matches. */
+  --c-disc: #f8f9f4;
 
   /* Neutrals */
   --c-ink: #1e2b22;
@@ -39,6 +43,30 @@
 
   --maxw: 1120px;
   --gutter: 24px;
+
+  color-scheme: light;
+}
+
+/* ---- Dark theme ------------------------------------------------------------
+   Set via [data-theme="dark"] on <html> (the pre-paint snippet in index.html +
+   useTheme). Brand fills stay; neutrals, surfaces and text greens flip. */
+:root[data-theme='dark'] {
+  --c-green-text: #7fd08c;
+  --c-orange-dark: #ffa53d;
+
+  --c-ink: #e8efe9;
+  --c-ink-soft: #b9c7bc;
+  --c-muted: #8fa194;
+  --c-paper: #0f1812;
+  --c-card: #16221a;
+  --c-tint: #1c2a21;
+  --c-line: #26362b;
+  --c-line-soft: #213026;
+
+  --c-field-bg: #111c15;
+  --c-field-line: #33453a;
+
+  color-scheme: dark;
 }
 
 *,
@@ -53,6 +81,9 @@ html {
 
 body {
   margin: 0;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
   background: var(--c-paper);
   color: var(--c-ink);
   font-family: var(--font-body);
@@ -64,7 +95,7 @@ img {
 }
 
 a {
-  color: var(--c-green);
+  color: var(--c-green-text);
   text-decoration: none;
 }
 a:hover {
@@ -108,7 +139,7 @@ h2,
 h3,
 h4 {
   margin: 0;
-  color: var(--c-green);
+  color: var(--c-green-text);
   text-wrap: pretty;
 }
 
@@ -208,8 +239,8 @@ p {
 }
 
 .btn-outline {
-  border-color: var(--c-green);
-  color: var(--c-green);
+  border-color: var(--c-green-text);
+  color: var(--c-green-text);
 }
 .btn-outline:hover {
   background: var(--c-green);

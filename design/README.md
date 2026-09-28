@@ -10,3 +10,10 @@ Full-size originals from the design phase. Not deployed — the site uses the tr
   - `favicon.ico` — 48px full badge; 32px and 16px zoomed in on the sun and leaf so they read at
     tab size
   - `apple-touch-icon.png` — 180px badge on the cream site background (iOS rounds the corners)
+
+Other derived assets in `frontend/src/assets/`:
+
+- `logo-tagline-dark.png` — `logo-tagline.png` with the dark-green wordmark recolored light, for
+  dark mode (the sun mark and orange "Rise" are untouched).
+- `icon-residential.png` — the "Residential & commercial" service icon: the pet icon's cream disc
+  and sparkles with the paw swapped for the group glyph from `icon-people.png`.

@@ -159,7 +159,7 @@ h1 {
   width: 96px;
   height: 96px;
   border-radius: 999px;
-  background: var(--c-paper);
+  background: var(--c-disc);
 }
 .service-disc img {
   display: block;
