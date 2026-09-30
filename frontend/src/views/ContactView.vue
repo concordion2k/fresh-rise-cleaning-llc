@@ -1,18 +1,27 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
+import { RouterLink } from 'vue-router';
 import PageHero from '@/components/PageHero.vue';
 import { business, phoneHref, emailHref } from '@/content/business';
 import { serviceOptions } from '@/content/services';
+import { findSpecial } from '@/content/specials';
 import { buildQuoteMailto, type QuoteRequest } from '@/utils/mailto';
+
+const props = defineProps<{
+  /** Coupon code from the Specials page ("Book this special"). */
+  special?: string;
+}>();
+
+const special = findSpecial(props.special);
 
 const form = reactive<QuoteRequest>({
   name: '',
   phone: '',
   email: '',
   location: '',
-  service: serviceOptions[0] ?? '',
+  service: special?.service ?? serviceOptions[0] ?? '',
   items: '',
-  notes: '',
+  notes: special ? `Special: ${special.title} (code ${special.code})` : '',
 });
 
 const sent = ref(false);
@@ -36,6 +45,11 @@ const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(business.ser
     <section class="container layout">
       <form class="card form" @submit.prevent="submit">
         <h2>Tell us about the job</h2>
+        <p v-if="special" class="applied" role="status">
+          <strong>{{ special.title }}</strong> &middot; code <code>{{ special.code }}</code> added
+          to your request.
+          <RouterLink to="/specials">Change</RouterLink>
+        </p>
         <div class="fields">
           <label>
             <span>Name</span>
@@ -102,7 +116,8 @@ const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(business.ser
             >.
           </template>
           <template v-else>
-            We&rsquo;ll never share your details. Prefer to talk? Call or text
+            We&rsquo;ll never share your details (see our
+            <RouterLink to="/privacy">privacy policy</RouterLink>). Prefer to talk? Call or text
             <a :href="phoneHref">{{ business.phone }}</a
             >.
           </template>
@@ -159,6 +174,29 @@ const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(business.ser
   margin-bottom: 24px;
   font-size: 22px;
   font-weight: 800;
+}
+/* Coupon carried over from the Specials page. */
+.applied {
+  margin: -8px 0 22px;
+  padding: 12px 16px;
+  border-left: 4px solid var(--c-orange);
+  border-radius: 8px;
+  background: var(--c-tint);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--c-ink-soft);
+}
+.applied strong {
+  color: var(--c-ink);
+}
+.applied code {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--c-ink);
+}
+.applied a {
+  margin-left: 4px;
+  font-weight: 600;
 }
 .fields {
   display: grid;

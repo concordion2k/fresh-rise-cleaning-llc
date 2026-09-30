@@ -23,7 +23,7 @@ published pricing, and get in touch. There is no backend: no accounts, CRM or sc
 │       ├── components/  # header, footer, page hero, CTA band, cards
 │       ├── views/       # Home, About, Services, Contact, 404
 │       ├── styles/      # theme.css — design tokens + shared classes
-│       └── assets/      # logo, icons, wave (bundled + content-hashed by Vite)
+│       └── assets/      # logo and icons (bundled + content-hashed by Vite)
 ├── design/      # full-size brand source art (logo master, icon sprite sheet) — not deployed
 ├── terraform/   # AWS infrastructure as code (+ bootstrap/ for one-time setup)
 └── .github/     # CI + deploy workflows
@@ -56,7 +56,13 @@ npm run dev        # → http://localhost:5173
 - **Phone, email, hours, service area, minimum call** → [frontend/src/content/business.ts](frontend/src/content/business.ts).
   Every page (header, footer, contact, mailto) reads from here.
 - **Services, packages and price list** → [frontend/src/content/services.ts](frontend/src/content/services.ts).
+- **Specials / coupons** → [frontend/src/content/specials.ts](frontend/src/content/specials.ts). Each
+  coupon hides itself the day after its `expires` date; if none are left, the page shows a "no
+  specials right now" message. The current four are samples — replace them before launch.
 - **Page copy** → the matching file in [frontend/src/views/](frontend/src/views/).
+- **Privacy policy** → [frontend/src/content/privacy.ts](frontend/src/content/privacy.ts). Keep it
+  truthful: if the business adds analytics, online booking, marketing texts or a new payment
+  method, update the matching section and `lastUpdated`.
 - **Page titles / search descriptions** → route `meta` in [frontend/src/router/index.ts](frontend/src/router/index.ts).
 
 ### Photos still to add

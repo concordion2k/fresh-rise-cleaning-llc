@@ -4,14 +4,22 @@ import { business, phoneHref, emailHref } from '@/content/business';
 import { useTheme } from '@/composables/useTheme';
 import logo from '@/assets/logo-tagline.png';
 import logoDark from '@/assets/logo-tagline-dark.png';
-import wave from '@/assets/wave.png';
 
 const year = new Date().getFullYear();
 const { current: theme, toggle } = useTheme();
 </script>
 
 <template>
-  <div class="wave" :style="{ backgroundImage: `url(${wave})` }" aria-hidden="true"></div>
+  <!-- Layered waves that stretch edge to edge; the front layer is the footer's own color, so the
+       waves flow straight into it. -->
+  <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+    <path class="wave-back" d="M0 46C180 18 360 14 560 38s380 50 560 28 260-36 320-40V120H0Z" />
+    <path
+      class="wave-mid"
+      d="M0 76c200-34 420-38 640-12s400 36 560 16c100-12 180-26 240-30V120H0Z"
+    />
+    <path class="wave-front" d="M0 100c240-26 480-30 720-10s480 24 720-6V120H0Z" />
+  </svg>
   <footer class="site-footer">
     <div class="container cols">
       <div>
@@ -39,7 +47,9 @@ const { current: theme, toggle } = useTheme();
         <p class="text lines">
           <RouterLink to="/about">About</RouterLink><br />
           <RouterLink to="/services">Services</RouterLink><br />
-          <RouterLink to="/contact">Contact Us</RouterLink>
+          <RouterLink to="/specials">Specials</RouterLink><br />
+          <RouterLink to="/contact">Contact Us</RouterLink><br />
+          <RouterLink to="/privacy">Privacy Policy</RouterLink>
         </p>
       </nav>
     </div>
@@ -84,21 +94,31 @@ const { current: theme, toggle } = useTheme();
 
 <style scoped>
 .wave {
-  height: 86px;
+  --wave-back: rgba(167, 212, 106, 0.35);
+  --wave-mid: rgba(76, 175, 80, 0.3);
+
+  display: block;
+  width: 100%;
+  height: clamp(56px, 7vw, 100px);
   margin-top: auto;
-  background-color: var(--c-paper);
-  background-repeat: repeat-x;
-  background-position: center;
-  background-size: auto 86px;
-  opacity: 0.85;
+  /* Keeps the footer's edge from showing a hairline gap on some zoom levels. */
+  margin-bottom: -1px;
 }
-/* The pale waves glare on a dark page; tone them down. */
 :root[data-theme='dark'] .wave {
-  opacity: 0.22;
+  --wave-back: rgba(76, 175, 80, 0.1);
+  --wave-mid: rgba(76, 175, 80, 0.2);
+}
+.wave-back {
+  fill: var(--wave-back);
+}
+.wave-mid {
+  fill: var(--wave-mid);
+}
+.wave-front {
+  fill: var(--c-card);
 }
 .site-footer {
   background: var(--c-card);
-  border-top: 1px solid var(--c-line);
 }
 .cols {
   display: grid;

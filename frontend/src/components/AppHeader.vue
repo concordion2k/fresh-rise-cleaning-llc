@@ -14,6 +14,7 @@ const links = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
   { to: '/services', label: 'Services' },
+  { to: '/specials', label: 'Specials' },
   { to: '/contact', label: 'Contact' },
 ];
 </script>
@@ -122,7 +123,7 @@ const links = [
   background: var(--c-green-text);
 }
 
-@media (max-width: 820px) {
+@media (max-width: 900px) {
   .brand img {
     height: 46px;
   }
